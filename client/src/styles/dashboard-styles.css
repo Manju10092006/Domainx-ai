@@ -1,0 +1,1185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Text Gradients */
+.text-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Realistic Sphere Button */
+.sphere-btn {
+    background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #3b82f6 40%, #2563eb 100%);
+    box-shadow:
+        inset -8px -8px 20px rgba(0, 0, 0, 0.15),
+        inset 8px 8px 20px rgba(255, 255, 255, 0.4),
+        0 20px 50px rgba(37, 99, 235, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sphere-btn::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 40%;
+    height: 25%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(2px);
+    opacity: 0.8;
+}
+
+.sphere-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    right: 20%;
+    width: 50%;
+    height: 30%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.4) 0%, rgba(37, 99, 235, 0) 70%);
+    filter: blur(5px);
+    mix-blend-mode: overlay;
+}
+
+.sphere-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: radial-gradient(circle at 35% 35%, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+    box-shadow:
+        inset -8px -8px 24px rgba(0, 0, 0, 0.2),
+        inset 8px 8px 24px rgba(255, 255, 255, 0.5),
+        0 0 60px rgba(59, 130, 246, 0.8),
+        0 0 100px rgba(37, 99, 235, 0.6),
+        0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Feature Card Styles */
+.feature-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.05),
+        0 8px 10px -6px rgba(0, 0, 0, 0.01),
+        0 0 0 1px rgba(59, 130, 246, 0.3),
+        0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Dashboard 3D Perspective */
+.dashboard-perspective {
+    perspective: 2000px;
+    perspective-origin: 50% 100px;
+    transform-style: preserve-3d;
+    padding-bottom: 2rem;
+}
+
+/* Text Wrap Component */
+.text-wrap {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.left-text {
+    font-size: 48px;
+    font-weight: 700;
+    color: #0f172a;
+    /* slate-900 */
+}
+
+.right-text {
+    position: relative;
+    height: 60px;
+    /* Adjusted for 48px font size + padding */
+    width: 800px;
+    /* Ensure enough width for long text */
+    overflow: hidden;
+}
+
+.swap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(20px);
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff6a00, #ee2fff);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .text-wrap {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .left-text,
+    .swap {
+        font-size: 32px;
+    }
+
+    .right-text {
+        height: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Arrow Animation */
+.arrow-path {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: drawArrow 2s ease-in-out infinite;
+}
+
+.arrow-head {
+    opacity: 0;
+    animation: showHead 2s ease-in-out infinite;
+}
+
+@keyframes drawArrow {
+    0% {
+        stroke-dashoffset: 150;
+    }
+
+    40% {
+        stroke-dashoffset: 0;
+    }
+
+    60% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes showHead {
+
+    0%,
+    35% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Pricing Section - Prismo Style Background */
+#pricing {
+    background: #ffffff;
+    background-image:
+        /* Noise texture overlay - subtle grain (8-12% opacity) */
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 0, 0, 0.02) 1px, rgba(0, 0, 0, 0.02) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 0, 0, 0.02) 1px, rgba(0, 0, 0, 0.02) 2px),
+        repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(0, 0, 0, 0.015) 1px, rgba(0, 0, 0, 0.015) 2px),
+        /* Prismo-style radial gradient: pinkish-purple top-left, peach top-right, white center */
+        radial-gradient(ellipse 120% 100% at 0% 0%, rgba(248, 209, 246, 0.20) 0%, rgba(248, 209, 246, 0.12) 20%, rgba(248, 209, 246, 0.06) 40%, transparent 70%),
+        radial-gradient(ellipse 120% 100% at 100% 0%, rgba(255, 229, 209, 0.20) 0%, rgba(255, 229, 209, 0.12) 20%, rgba(255, 229, 209, 0.06) 40%, transparent 70%),
+        radial-gradient(ellipse 180% 120% at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 30%, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 1) 100%);
+    background-size: 3px 3px, 3px 3px, 3px 3px, 100% 100%, 100% 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0, 0 0, 100% 0, center center;
+    background-repeat: repeat, repeat, repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* Pricing Toggle */
+.pricing-toggle {
+    color: #64748b;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.pricing-toggle.active {
+    color: #0f172a;
+    background: #f1f5f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Pricing Cards */
+.pricing-card {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    filter: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* Pro Plan - Highlighted with Blue Glow */
+.pricing-card-pro {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    filter: none !important;
+    box-shadow:
+        0 20px 25px -5px rgba(59, 130, 246, 0.1),
+        0 10px 10px -5px rgba(59, 130, 246, 0.04),
+        0 0 0 1px rgba(59, 130, 246, 0.1),
+        0 0 40px rgba(59, 130, 246, 0.15) !important;
+}
+
+.pricing-card-pro::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(20px);
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pricing-card-pro:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow:
+        0 25px 30px -5px rgba(59, 130, 246, 0.2),
+        0 15px 15px -5px rgba(59, 130, 246, 0.08),
+        0 0 0 1px rgba(59, 130, 246, 0.2),
+        0 0 60px rgba(59, 130, 246, 0.25) !important;
+}
+
+/* Ensure all cards are fully visible */
+.pricing-card,
+.pricing-card-pro {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Responsive Pricing */
+@media (max-width: 768px) {
+    #pricing {
+        padding: 4rem 1rem;
+    }
+
+    .pricing-card,
+    .pricing-card-pro {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Saved Jobs Styles */
+.saved-jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Saved Jobs Wrapper */
+.saved-jobs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.saved-job-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.saved-job-card:hover {
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.saved-job-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.saved-job-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.saved-job-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.saved-job-meta {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.saved-job-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn {
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease, color 0.2s ease, border-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    white-space: nowrap;
+}
+
+.btn-view-job {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.btn-view-job:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.btn-remove-job {
+    background: #fff;
+    color: #dc2626;
+    border: 1px solid rgba(220, 38, 38, 0.5);
+}
+
+.btn-remove-job:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: rgba(220, 38, 38, 0.7);
+    transform: translateY(-1px);
+}
+
+/* Responsive Saved Jobs */
+@media (max-width: 768px) {
+    .saved-job-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .saved-job-actions {
+        margin-top: 0;
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    .saved-job-actions .btn {
+        flex: 1;
+    }
+}
+
+/* Legacy saved-job-card styles (for compatibility) */
+.saved-job-card.legacy {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.saved-job-card:hover {
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+    transform: translateY(-2px);
+}
+
+.saved-job-card.fade-in-up {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.35s ease-out forwards;
+}
+
+.saved-job-card.fade-out {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: all 0.25s ease-out;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.saved-job-card .job-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.saved-job-card .job-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: white;
+    border: 1px solid #f3f4f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.saved-job-card .job-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+}
+
+.saved-job-card .logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.saved-job-card .job-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.saved-job-card .job-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+}
+
+.saved-job-card .job-company {
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    margin: 0 0 6px 0;
+}
+
+.saved-job-card .job-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.saved-job-card .job-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.saved-job-card .btn-secondary {
+    padding: 10px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saved-job-card .btn-secondary:hover {
+    background: #f9fafb;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.saved-job-card .btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saved-job-card .btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.empty-state {
+    padding: 48px 24px;
+    text-align: center;
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* Responsive Saved Jobs */
+@media (max-width: 768px) {
+    .saved-job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .saved-job-card .job-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .saved-job-card .btn-secondary,
+    .saved-job-card .btn-primary {
+        flex: 1;
+    }
+}
+
+/* ============================================================
+   RESUME HISTORY STYLES
+   ============================================================ */
+
+.resume-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* New Card Design - Matching Image */
+.resume-history-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.resume-history-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.resume-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.resume-card-title-section {
+    flex: 1;
+}
+
+.resume-card-filename {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+
+.resume-card-date {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.resume-card-score {
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.resume-card-content {
+    margin-bottom: 20px;
+}
+
+.resume-card-skills-section {
+    margin-bottom: 16px;
+}
+
+.skills-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin: 0 0 10px 0;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.skill-tag.more-skills {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.resume-card-snippet {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border-left: 3px solid #3b82f6;
+}
+
+.snippet-text {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.resume-card-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.action-btn i {
+    font-size: 14px;
+}
+
+.view-report-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.view-report-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.find-jobs-btn {
+    background: #10b981;
+    color: #ffffff;
+}
+
+.find-jobs-btn:hover {
+    background: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.download-btn {
+    background: #64748b;
+    color: #ffffff;
+}
+
+.download-btn:hover {
+    background: #475569;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+}
+
+.resume-history-item {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    padding: 20px 24px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.resume-history-item:hover {
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.1);
+    transform: translateY(-2px);
+}
+
+.resume-history-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.resume-history-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.resume-history-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.resume-history-filename {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resume-history-date {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 10px 0;
+}
+
+.resume-history-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.resume-history-skills .skill-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #e0f2fe;
+    color: #0369a1;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.resume-history-skills .skill-badge.more {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.resume-history-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.resume-history-score {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.resume-history-score small {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.resume-history-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.resume-history-actions button {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-view-details {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.btn-view-details:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.btn-delete-history {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete-history:hover {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+/* Resume History Modal */
+.history-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.history-modal {
+    background: #ffffff;
+    border-radius: 24px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.history-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    border-radius: 24px 24px 0 0;
+}
+
+.history-modal-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.history-modal-body {
+    padding: 24px;
+}
+
+.modal-score-section {
+    text-align: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.modal-score {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.modal-score.good { color: #059669; }
+.modal-score.medium { color: #d97706; }
+.modal-score.low { color: #dc2626; }
+
+.modal-score-section p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    margin: 0;
+}
+
+.modal-score-section small {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.modal-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-block {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.detail-block h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skills-list .skill-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
+}
+
+.detail-list li:last-child {
+    border-bottom: none;
+}
+
+.detail-text {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.detail-list.strengths li::before {
+    content: "✓ ";
+    color: #059669;
+    font-weight: bold;
+}
+
+.detail-list.weaknesses li::before {
+    content: "⚠ ";
+    color: #d97706;
+}
+
+.detail-list.suggestions li::before {
+    content: "💡 ";
+}
+
+/* Responsive Resume History */
+@media (max-width: 768px) {
+    .resume-history-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .resume-history-meta {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .resume-card-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .resume-card-score {
+        align-self: flex-start;
+    }
+    
+    .resume-card-actions {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .history-modal {
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+    
+    .modal-score {
+        font-size: 48px;
+    }
+}

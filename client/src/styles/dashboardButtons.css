@@ -1,0 +1,148 @@
+/* dashboardButtons.css - Dashboard Button Animation Styles */
+
+/* CSS Custom Properties for Neon Edge */
+@property --neon-opacity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* Initialize CSS variable */
+.dash-btn-animated,
+[data-anim="cta"].dash-btn-animated,
+.btn-header.dash-btn-animated,
+.dashboard-body button.dash-btn-animated,
+.dashboard-shell button.dash-btn-animated {
+  --neon-opacity: 0;
+}
+
+/* Dashboard Button Base Styles */
+.dash-btn-animated,
+[data-anim="cta"].dash-btn-animated,
+.btn-header.dash-btn-animated,
+.dashboard-body button.dash-btn-animated,
+.dashboard-shell button.dash-btn-animated {
+  position: relative;
+  overflow: visible;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Neon Gradient Edge - Using ::before pseudo-element */
+.dash-btn-animated::before,
+[data-anim="cta"].dash-btn-animated::before,
+.btn-header.dash-btn-animated::before,
+.dashboard-body button.dash-btn-animated::before,
+.dashboard-shell button.dash-btn-animated::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #00ffff 0%,
+    #ff00ff 50%,
+    #00ffff 100%
+  );
+  background-size: 200% 200%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  -webkit-mask-composite: exclude;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: var(--neon-opacity, 0);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  animation: neon-shift 3s ease infinite;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+@keyframes neon-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Disabled State */
+.dash-btn-disabled,
+.dash-btn-animated:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dash-btn-disabled::before,
+.dash-btn-animated:disabled::before {
+  opacity: 0 !important;
+}
+
+/* Loading State */
+.dash-btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.dash-btn-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dash-btn-spinner::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: dash-spin 0.6s linear infinite;
+}
+
+@keyframes dash-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success State */
+.dash-btn-success {
+  position: relative;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .dash-btn-animated,
+  .dash-btn-animated::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .dash-btn-animated {
+    transform: none !important;
+  }
+  
+  .dash-btn-spinner::after {
+    animation: none !important;
+  }
+}
+
+/* GPU Acceleration */
+.dash-btn-animated {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+

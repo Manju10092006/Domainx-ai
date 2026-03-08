@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechHire — Find Your Dream Tech Job</title>
+    <link rel="stylesheet" href="./widget.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: #060d1a;
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        height: 60px;
+        background: rgba(6, 13, 26, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      }
+
+      .nav-logo {
+        font-size: 20px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #7c3aed, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: rgba(226, 232, 240, 0.7);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover { color: #e2e8f0; }
+
+      .nav-cta {
+        background: linear-gradient(135deg, #7c3aed, #3b82f6);
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        text-align: center;
+        padding: 90px 24px 70px;
+        background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(124, 58, 237, 0.15);
+        border: 1px solid rgba(124, 58, 237, 0.35);
+        color: #a78bfa;
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 5vw, 58px);
+        font-weight: 800;
+        line-height: 1.1;
+        max-width: 780px;
+        margin: 0 auto 20px;
+      }
+
+      .hero h1 span {
+        background: linear-gradient(90deg, #7c3aed, #3b82f6, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        max-width: 520px;
+        margin: 0 auto 36px;
+        color: rgba(226, 232, 240, 0.65);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #7c3aed, #3b82f6);
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* ── STATS ── */
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        flex-wrap: wrap;
+        padding: 32px 24px;
+        border-top: 1px solid rgba(148, 163, 184, 0.08);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+        margin: 0 40px;
+      }
+
+      .stat-item { text-align: center; }
+
+      .stat-number {
+        font-size: 28px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #7c3aed, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        font-size: 13px;
+        color: rgba(226, 232, 240, 0.5);
+        margin-top: 4px;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section {
+        padding: 64px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .section-sub {
+        color: rgba(226, 232, 240, 0.5);
+        font-size: 14px;
+        margin-bottom: 36px;
+      }
+
+      /* ── JOB CARDS ── */
+      .jobs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 16px;
+      }
+
+      .job-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 14px;
+        padding: 20px;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+      }
+
+      .job-card:hover {
+        border-color: rgba(124, 58, 237, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .job-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .company-logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        background: rgba(124, 58, 237, 0.15);
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        flex-shrink: 0;
+      }
+
+      .job-info-top { flex: 1; }
+
+      .company-name {
+        font-size: 12px;
+        color: rgba(226, 232, 240, 0.5);
+      }
+
+      .job-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #e2e8f0;
+      }
+
+      .job-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .tag {
+        background: rgba(2, 6, 23, 0.5);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        color: rgba(226, 232, 240, 0.7);
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+
+      .tag.green {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: rgba(34, 197, 94, 0.25);
+        color: #86efac;
+      }
+
+      .salary {
+        font-size: 14px;
+        font-weight: 700;
+        color: #a78bfa;
+      }
+
+      /* ── COMPANIES ── */
+      .companies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 14px;
+      }
+
+      .company-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        transition: border-color 0.2s;
+        cursor: pointer;
+      }
+
+      .company-card:hover { border-color: rgba(59, 130, 246, 0.45); }
+
+      .company-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .company-card-name {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .company-card-domain {
+        font-size: 12px;
+        color: rgba(226, 232, 240, 0.45);
+      }
+
+      .company-openings {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #86efac;
+      }
+
+      /* ── BANNER ── */
+      .banner {
+        margin: 0 40px 64px;
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.2));
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        border-radius: 18px;
+        padding: 40px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .banner h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+      .banner p { color: rgba(226, 232, 240, 0.6); font-size: 14px; }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid rgba(148, 163, 184, 0.08);
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      footer span { font-size: 13px; color: rgba(226, 232, 240, 0.35); }
+    </style>
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">TechHire</div>
+      <ul class="nav-links">
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Companies</a></li>
+        <li><a href="#">Salaries</a></li>
+        <li><a href="#">Resources</a></li>
+      </ul>
+      <button class="nav-cta">Post a Job</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">🚀 10,000+ new jobs this week</div>
+      <h1>Find Your Next<br /><span>Tech Career</span> Opportunity</h1>
+      <p>Discover top roles at leading tech companies. Get AI-powered career guidance with our Career Assistant chatbot.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Browse Jobs</button>
+        <button class="btn-secondary">Explore Companies</button>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">48K+</div>
+        <div class="stat-label">Active Jobs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3.2K+</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1.8M+</div>
+        <div class="stat-label">Job Seekers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Placement Rate</div>
+      </div>
+    </div>
+
+    <!-- FEATURED JOBS -->
+    <section class="section">
+      <div class="section-title">Featured Jobs</div>
+      <div class="section-sub">Handpicked roles at top companies</div>
+      <div class="jobs-grid">
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">🔍</div>
+            <div class="job-info-top">
+              <div class="company-name">Google</div>
+              <div class="job-title">Senior Frontend Engineer</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Remote</span>
+            <span class="tag green">Actively Hiring</span>
+          </div>
+          <div class="salary">$160K – $220K / yr</div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">☁️</div>
+            <div class="job-info-top">
+              <div class="company-name">Amazon</div>
+              <div class="job-title">ML Engineer – Alexa AI</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">Python</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">Hybrid</span>
+            <span class="tag green">Actively Hiring</span>
+          </div>
+          <div class="salary">$180K – $250K / yr</div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">🪟</div>
+            <div class="job-info-top">
+              <div class="company-name">Microsoft</div>
+              <div class="job-title">Backend Engineer – Azure</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">Go</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">On-site</span>
+          </div>
+          <div class="salary">$155K – $210K / yr</div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">🤖</div>
+            <div class="job-info-top">
+              <div class="company-name">OpenAI</div>
+              <div class="job-title">Research Engineer – LLMs</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">Python</span>
+            <span class="tag">CUDA</span>
+            <span class="tag">Remote</span>
+            <span class="tag green">Actively Hiring</span>
+          </div>
+          <div class="salary">$200K – $300K / yr</div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">📦</div>
+            <div class="job-info-top">
+              <div class="company-name">Meta</div>
+              <div class="job-title">Data Scientist – Growth</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">SQL</span>
+            <span class="tag">Python</span>
+            <span class="tag">Hybrid</span>
+          </div>
+          <div class="salary">$150K – $200K / yr</div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-top">
+            <div class="company-logo">🚗</div>
+            <div class="job-info-top">
+              <div class="company-name">Tesla</div>
+              <div class="job-title">Embedded Systems Engineer</div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <span class="tag">C++</span>
+            <span class="tag">ROS</span>
+            <span class="tag">On-site</span>
+          </div>
+          <div class="salary">$140K – $190K / yr</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TOP COMPANIES -->
+    <section class="section" style="padding-top: 0;">
+      <div class="section-title">Top Companies Hiring</div>
+      <div class="section-sub">Companies actively looking for tech talent</div>
+      <div class="companies-grid">
+        <div class="company-card">
+          <div class="company-icon">🔍</div>
+          <div class="company-card-name">Google</div>
+          <div class="company-card-domain">Search · AI · Cloud</div>
+          <div class="company-openings">142 openings</div>
+        </div>
+        <div class="company-card">
+          <div class="company-icon">🤖</div>
+          <div class="company-card-name">OpenAI</div>
+          <div class="company-card-domain">AI Research · LLMs</div>
+          <div class="company-openings">38 openings</div>
+        </div>
+        <div class="company-card">
+          <div class="company-icon">☁️</div>
+          <div class="company-card-name">Amazon</div>
+          <div class="company-card-domain">Cloud · E-commerce</div>
+          <div class="company-openings">315 openings</div>
+        </div>
+        <div class="company-card">
+          <div class="company-icon">🪟</div>
+          <div class="company-card-name">Microsoft</div>
+          <div class="company-card-domain">Cloud · Productivity</div>
+          <div class="company-openings">210 openings</div>
+        </div>
+        <div class="company-card">
+          <div class="company-icon">📦</div>
+          <div class="company-card-name">Meta</div>
+          <div class="company-card-domain">Social · AR/VR · AI</div>
+          <div class="company-openings">97 openings</div>
+        </div>
+        <div class="company-card">
+          <div class="company-icon">🍎</div>
+          <div class="company-card-name">Apple</div>
+          <div class="company-card-domain">Hardware · Software</div>
+          <div class="company-openings">178 openings</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER -->
+    <div class="banner">
+      <div>
+        <h2>Not sure where to start? 💼</h2>
+        <p>Ask our AI Career Assistant about salaries, interview tips, company culture, and the best roles for your skills.</p>
+      </div>
+      <button class="btn-primary" onclick="document.querySelector('.ca-fab').click()">Chat with Career Assistant →</button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2025 TechHire. All rights reserved.</span>
+      <span>Made with ❤️ for developers everywhere</span>
+    </footer>
+
+    <!-- CHATBOT WIDGET (just 1 script tag) -->
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="./widget.js"></script>
+
+  </body>
+</html>

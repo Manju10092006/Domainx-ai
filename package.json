@@ -1,0 +1,30 @@
+{
+  "name": "domainx-ai",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "start": "concurrently -k -n \"AUTH,RESUME,JOBS\" -c \"magenta,cyan,green\" \"npm start --prefix ./auth-server\" \"npm start --prefix ./resume-server\" \"npm start --prefix ./server\"",
+    "dev": "concurrently -k -n \"AUTH,RESUME,JOBS\" -c \"magenta,cyan,green\" \"npm run dev --prefix ./auth-server\" \"npm run dev --prefix ./resume-server\" \"npm run dev --prefix ./server\"",
+    "server": "npm start --prefix ./server",
+    "auth": "npm start --prefix ./auth-server",
+    "resume": "npm start --prefix ./resume-server"
+  },
+
+  "keywords": [
+    "job",
+    "aggregator",
+    "jobs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "gsap": "^3.13.0",
+    "redis": "^5.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

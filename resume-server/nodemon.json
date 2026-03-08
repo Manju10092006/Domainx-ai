@@ -1,0 +1,25 @@
+{
+    "watch": [
+        "server.js",
+        "routes/",
+        "controllers/",
+        "utils/",
+        "models/"
+    ],
+    "ignore": [
+        "uploads/*",
+        "uploads/",
+        "tmp/*",
+        "tmp/",
+        "*.pdf",
+        "*.docx",
+        "*.doc",
+        "*.txt",
+        "*.jpg",
+        "*.jpeg",
+        "*.png",
+        "node_modules/*"
+    ],
+    "ext": "js,json",
+    "delay": "1000"
+}

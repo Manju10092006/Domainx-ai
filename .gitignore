@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables - NEVER commit
+.env
+.env.local
+.env.development
+.env.production
+.env.*
+
+# Build outputs
+dist/
+build/
+.next/
+
+# ML model cache & large files
+model/
+models/
+.ml-cache/
+*.bin
+*.pt
+*.pth
+*.safetensors
+sentence_transformers/
+__pycache__/
+
+# Upload / temp folders
+uploads/
+temp/
+tmp/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage
+coverage/
+.nyc_output/

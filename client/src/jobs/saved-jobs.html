@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomainX AI – Intelligent Career Intelligence Platform</title>
+    <meta name="description"
+        content="DomainX AI – AI-powered skill assessment, career discovery, and intelligent job matching platform.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    
+    <!-- Global Auth: Extract token from URL if present (MUST RUN FIRST) -->
+    <script src="../components/global-auth.js"></script>
+    
+    <style>
+        .job-card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .job-card:hover {
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .job-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .job-card p {
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        
+        .job-card button {
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .job-card button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 min-h-screen">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                <span
+                    class="text-2xl font-extrabold tracking-tight text-gray-900 group-hover:text-primary transition-colors">DomainX
+                    AI</span>
+            </a>
+
+            <!-- Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                <a href="jobs.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Find Jobs</a>
+                <a href="saved-jobs.html" class="text-sm font-medium text-primary transition-colors">Saved Jobs</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="jobs.html" class="bg-primary hover:bg-primary-hover text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all">
+                    Find Jobs
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-16 px-4 md:px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-900 mb-8">Saved Jobs</h1>
+            <div id="savedJobsList" class="space-y-4">
+                <!-- Saved jobs will be rendered here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12 px-6 mt-16">
+        <div class="max-w-7xl mx-auto text-center">
+            <h3 class="text-2xl font-bold mb-4">DomainX AI</h3>
+            <p class="text-gray-400 mb-6">Where skills meet opportunity</p>
+            <div class="flex justify-center gap-6 text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="#" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <p class="text-gray-500 text-sm mt-8">© 2026 DomainX AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/saved-jobs.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+# Environment files - NEVER commit these!
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+!.env.example
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads (may contain sensitive resume data)
+uploads/*
+!uploads/.gitkeep
+
+# Python worker cache
+python-worker/__pycache__/
+python-worker/*.pyc

@@ -1,0 +1,1629 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomainX AI – Intelligent Career Intelligence Platform</title>
+    <meta name="description"
+        content="DomainX AI – AI-powered skill assessment, career discovery, and intelligent job matching platform.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png"
+        href="../../public/images/Black_and_Yellow_Modern_Simple_Electric_Motorcycle_Logo__1_-removebg-preview.png">
+    <link rel="shortcut icon" type="image/png"
+        href="../../public/images/Black_and_Yellow_Modern_Simple_Electric_Motorcycle_Logo__1_-removebg-preview.png">
+    <link rel="apple-touch-icon"
+        href="../../public/images/Black_and_Yellow_Modern_Simple_Electric_Motorcycle_Logo__1_-removebg-preview.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/chatbots.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/dashboardButtons.css">
+    <link rel="stylesheet" href="../styles/navbarAnimations.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Global Auth: Extract token from URL if present (MUST RUN FIRST) -->
+    <script src="../components/global-auth.js"></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           HERO — ASCII Dot Art + Bold Typography
+           Axial.ai Inspired · No Images · Pure CSS + Unicode
+           ═══════════════════════════════════════════════════════════ */
+
+        /* ── Navbar Override: blend with hero ── */
+        .header {
+            background: #EBEBEB !important;
+            box-shadow: none !important;
+            border-bottom: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .header .container,
+        .header .header-content {
+            background: transparent !important;
+        }
+
+        body {
+            background: #EBEBEB !important;
+        }
+
+        .hero-redesign {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #EBEBEB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        /* ── Dot Map Canvases ── */
+        .dot-canvas {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dot-canvas-left {
+            top: 0;
+            left: 0;
+            opacity: 0;
+            animation: asciiSlideLeft 1.4s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .dot-canvas-right {
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            animation: asciiSlideRight 1.4s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes asciiSlideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes asciiSlideRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ── Hero Center Content ── */
+        .hero-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 24px;
+            opacity: 0;
+            animation: heroFadeUp 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-heading-line1 {
+            font-family: 'Inter', Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #333;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .hero-heading-line2 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: #111;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin: 0 0 20px;
+        }
+
+        .hero-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 1.3vw, 14px);
+            font-weight: 400;
+            color: #888;
+            line-height: 1.7;
+            max-width: 380px;
+            margin: 0 auto 32px;
+            letter-spacing: -0.005em;
+        }
+
+        /* ── Dark Pill Button ── */
+        .hero-dark-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 32px;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-dark-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-dark-btn:active {
+            transform: translateY(0) scale(0.97);
+        }
+
+        /* ── Bottom Info Bar ── */
+        .hero-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 32px 48px;
+            z-index: 3;
+            opacity: 0;
+            animation: heroFadeUp 1s 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-bottom-bar .bottom-col {
+            flex: 1;
+        }
+
+        .hero-bottom-bar .bottom-col-left {
+            text-align: left;
+        }
+
+        .hero-bottom-bar .bottom-col-center {
+            text-align: center;
+        }
+
+        .hero-bottom-bar .bottom-col-right {
+            text-align: right;
+        }
+
+        .hero-bottom-bar .bottom-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            font-weight: 400;
+            color: #999;
+            line-height: 1.6;
+            letter-spacing: -0.005em;
+        }
+
+        .hero-bottom-bar .bottom-text-italic {
+            font-style: italic;
+            color: #888;
+        }
+
+        .hero-bottom-bar .bottom-text-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: #777;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .hero-bottom-bar .bottom-text-link:hover {
+            color: #333;
+        }
+
+        /* ── Fade Animation ── */
+        @keyframes heroFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Thin Divider Line ── */
+        .hero-divider {
+            position: absolute;
+            bottom: 80px;
+            left: 48px;
+            right: 48px;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.07);
+            z-index: 3;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .hero-bottom-bar {
+                padding: 28px 32px;
+            }
+
+            .hero-divider {
+                left: 32px;
+                right: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-redesign {
+                min-height: 90vh;
+                padding: 80px 0 100px;
+            }
+
+            .dot-canvas-left,
+            .dot-canvas-right {
+                display: none;
+            }
+
+            .hero-bottom-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                padding: 20px 24px;
+            }
+
+            .hero-bottom-bar .bottom-col {
+                text-align: center !important;
+            }
+
+            .hero-divider {
+                left: 24px;
+                right: 24px;
+                bottom: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-redesign {
+                min-height: 80vh;
+            }
+
+            .hero-dark-btn {
+                padding: 12px 26px;
+                font-size: 12px;
+            }
+        }
+
+        /* ─── Animated Dashboard Mockup ─── */
+        .dash-mock {
+            width: 100%;
+            height: 100%;
+            background: #f4f6fb;
+            border-radius: inherit;
+            padding: 14px;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Profile header bar */
+        .dm-profile {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            animation: dmSlideIn 0.5s ease both;
+        }
+
+        .dm-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #2563EB, #7C3AED);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .dm-profile-info {
+            flex: 1;
+        }
+
+        .dm-profile-info .dm-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .dm-profile-info .dm-role {
+            font-size: 10px;
+            color: #2563EB;
+            font-weight: 600;
+        }
+
+        .dm-stats {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dm-stat {
+            text-align: center;
+        }
+
+        .dm-stat .dv {
+            font-size: 13px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .dm-stat .dl {
+            font-size: 8px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .dm-rank {
+            text-align: right;
+            background: #f0f4ff;
+            border-radius: 8px;
+            padding: 4px 8px;
+        }
+
+        .dm-rank .dr-label {
+            font-size: 8px;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .dm-rank .dr-val {
+            font-size: 12px;
+            font-weight: 800;
+            color: #2563EB;
+        }
+
+        .dm-rank .dr-rise {
+            font-size: 9px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        /* Section label */
+        .dm-section-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            padding: 0 2px;
+            animation: dmSlideIn 0.6s ease both;
+        }
+
+        /* Company cards grid */
+        .dm-companies {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 7px;
+        }
+
+        .dm-company-card {
+            background: #fff;
+            border-radius: 9px;
+            padding: 9px 8px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+            animation: dmSlideIn 0.5s ease both;
+        }
+
+        .dm-company-card:nth-child(1) {
+            animation-delay: 0.10s;
+        }
+
+        .dm-company-card:nth-child(2) {
+            animation-delay: 0.22s;
+        }
+
+        .dm-company-card:nth-child(3) {
+            animation-delay: 0.34s;
+        }
+
+        .dm-company-card:nth-child(4) {
+            animation-delay: 0.46s;
+        }
+
+        .dm-company-card:nth-child(5) {
+            animation-delay: 0.58s;
+        }
+
+        .dm-company-card:nth-child(6) {
+            animation-delay: 0.70s;
+        }
+
+        .dm-co-logo {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .dm-co-name {
+            font-size: 10px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 1px;
+        }
+
+        .dm-co-role {
+            font-size: 8px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .dm-match-pct {
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .dm-match-label {
+            font-size: 8px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .strong {
+            color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .moderate {
+            color: #ca8a04;
+            background: #fefce8;
+        }
+
+        .needs {
+            color: #dc2626;
+            background: #fef2f2;
+        }
+
+        /* Pulsing match bar on the Strong Match cards */
+        .dm-bar-wrap {
+            height: 3px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .dm-bar {
+            height: 100%;
+            border-radius: 2px;
+            animation: dmGrow 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        @keyframes dmGrow {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes dmSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Soft floating animation on the whole card */
+        @keyframes dmFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .dash-mock {
+            animation: dmFloat 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="container">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="#" class="logo-link">
+                                <img src="../../public/images/Black_and_Yellow_Modern_Simple_Electric_Motorcycle_Logo__1_-removebg-preview.png"
+                                    alt="DomainX AI" class="logo-text">
+                            </a>
+                        </div>
+                        <nav class="nav" data-anim="nav-scroll">
+                            <a href="../jobs/index.html" class="nav-link">Jobs</a>
+                            <a href="./skill-test.html" class="nav-link">Skill Test</a>
+                            <a href="./ai-dashboard.html" class="nav-link">Dashboard</a>
+                            <a href="./dashboard/index.html" class="nav-link">Features</a>
+                            <a href="./dashboard/index.html#view-upload-resume" class="nav-link">Resume</a>
+                            <div class="auth-ui-container" data-signup-url="./signup.html"
+                                data-profile-url="./dashboard/index.html#view-profile"></div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main">
+                <!-- ═══ HERO SECTION — ASCII Dot Art ═══ -->
+                <section class="hero-redesign" id="hero">
+
+                    <!-- Dot Map Canvas — Left -->
+                    <canvas class="dot-canvas dot-canvas-left" id="dotCanvasLeft" aria-hidden="true"></canvas>
+
+                    <!-- Dot Map Canvas — Right -->
+                    <canvas class="dot-canvas dot-canvas-right" id="dotCanvasRight" aria-hidden="true"></canvas>
+
+                    <!-- Hero Center Content -->
+                    <div class="hero-center">
+                        <h1>
+                            <span class="hero-heading-line1">DomainX AI</span><br>
+                            <span class="hero-heading-line2">Where Skills Meet Opportunity</span>
+                        </h1>
+                        <p class="hero-desc">
+                            AI-powered career intelligence platform combining adaptive skill assessment and intelligent
+                            job matching.
+                        </p>
+                        <a href="../jobs/index.html" class="hero-dark-btn" id="hero-explore-jobs">
+                            Explore Jobs
+                        </a>
+                    </div>
+
+                    <!-- Thin Divider -->
+                    <div class="hero-divider" aria-hidden="true"></div>
+
+                    <!-- Bottom Info Bar -->
+                    <div class="hero-bottom-bar">
+                        <div class="bottom-col bottom-col-left">
+                            <span class="bottom-text bottom-text-italic">The journey begins in stillness.</span>
+                        </div>
+                        <div class="bottom-col bottom-col-center">
+                            <span class="bottom-text">A tranquil space for personal growth, dreamwork,<br>and guided
+                                reflection. No noise. Just becoming.</span>
+                        </div>
+                        <div class="bottom-col bottom-col-right">
+                            <a href="#jobs" class="bottom-text-link">[Scroll to Explore]</a>
+                        </div>
+                    </div>
+
+                    <!-- Dot Map Generator Script — Halftone Hands -->
+                    <script>
+                        (function () {
+                            function drawHalftoneHand(canvasId, side) {
+                                var c = document.getElementById(canvasId);
+                                if (!c) return;
+                                var w = Math.min(560, window.innerWidth * 0.44);
+                                var h = Math.min(560, window.innerHeight * 0.82);
+                                c.width = w; c.height = h;
+                                var ctx = c.getContext('2d');
+                                ctx.clearRect(0, 0, w, h);
+
+                                // 1. Create offscreen canvas for rasterization
+                                var offCanvas = document.createElement('canvas');
+                                offCanvas.width = w;
+                                offCanvas.height = h;
+                                var octx = offCanvas.getContext('2d', { willReadFrequently: true });
+
+                                // 2. Fill background black
+                                octx.fillStyle = '#000';
+                                octx.fillRect(0, 0, w, h);
+
+                                // 3. Define accurate SVG paths for hands (0-100 coordinates)
+                                var pathStr = "";
+                                if (side === 'left') {
+                                    // Left hand: reaching out, fingers splayed (Creation of Adam style)
+                                    pathStr = "M 0 40 " +
+                                        "C 15 35 30 35 40 38 " +
+                                        "C 55 42 70 48 85 55 " +
+                                        "C 90 58 88 63 83 62 " +
+                                        "C 70 58 60 53 50 48 " +
+                                        "C 60 55 75 62 80 66 " +
+                                        "C 85 69 83 74 78 72 " +
+                                        "C 65 67 55 60 48 55 " +
+                                        "C 55 62 65 68 70 72 " +
+                                        "C 75 75 73 80 68 78 " +
+                                        "C 58 73 50 66 45 61 " +
+                                        "C 50 68 55 75 60 78 " +
+                                        "C 65 82 62 86 57 83 " +
+                                        "C 50 78 40 70 35 65 " +
+                                        "C 35 75 40 85 42 90 " +
+                                        "C 43 95 38 98 33 93 " +
+                                        "C 25 85 15 75 5 70 " +
+                                        "C 2 68 0 68 0 68 Z";
+                                } else {
+                                    // Right hand: pointing index finger towards center
+                                    pathStr = "M 100 45 " +
+                                        "C 85 45 75 42 70 38 " +
+                                        "C 65 35 62 38 65 42 " +
+                                        "C 68 45 72 48 75 50 " +
+                                        "C 60 50 40 50 20 52 " +
+                                        "C 15 52 12 58 18 59 " +
+                                        "C 35 61 55 60 65 60 " +
+                                        "C 60 63 56 68 58 72 " +
+                                        "C 60 77 68 76 72 73 " +
+                                        "C 68 76 65 80 67 84 " +
+                                        "C 69 88 75 87 78 83 " +
+                                        "C 75 86 72 90 75 94 " +
+                                        "C 77 98 85 96 85 90 " +
+                                        "C 88 85 95 85 100 85 Z";
+                                }
+
+                                // 4. Draw path on offscreen canvas with heavy blur for 3D depth map
+                                octx.filter = 'blur(16px)';
+                                octx.fillStyle = '#fff';
+                                octx.beginPath();
+
+                                var commands = pathStr.split(/(?=[MCLQZ])/);
+                                commands.forEach(function (cmd) {
+                                    cmd = cmd.trim();
+                                    if (!cmd) return;
+                                    var type = cmd[0];
+                                    var args = cmd.slice(1).trim().split(/[\s,]+/).map(Number);
+                                    if (type === 'M') octx.moveTo(args[0] / 100 * w, args[1] / 100 * h);
+                                    if (type === 'L') octx.lineTo(args[0] / 100 * w, args[1] / 100 * h);
+                                    if (type === 'C') octx.bezierCurveTo(args[0] / 100 * w, args[1] / 100 * h, args[2] / 100 * w, args[3] / 100 * h, args[4] / 100 * w, args[5] / 100 * h);
+                                    if (type === 'Z') octx.closePath();
+                                });
+                                octx.fill();
+
+                                // Second pass: less blur to keep the core solid
+                                octx.filter = 'blur(6px)';
+                                octx.fill();
+
+                                // 5. Read pixel data
+                                var imgData;
+                                try {
+                                    imgData = octx.getImageData(0, 0, w, h).data;
+                                } catch (e) { return; } // Catch fallback for strict browsers if needed
+
+                                // 6. Draw halftone dots based on pixel brightness
+                                var gap = 7;
+                                var baseDotR = 2.0;
+                                var cols = Math.floor(w / gap);
+                                var rows = Math.floor(h / gap);
+
+                                for (var row = 0; row < rows; row++) {
+                                    for (var col = 0; col < cols; col++) {
+                                        var x = Math.floor(col * gap + gap / 2);
+                                        var y = Math.floor(row * gap + gap / 2);
+                                        var idx = (y * w + x) * 4;
+                                        var brightness = imgData[idx]; // r channel
+
+                                        if (brightness > 12) { // Threshold to trim outer extreme blur
+                                            var intensity = brightness / 255;
+
+                                            // Organic noise for print texture
+                                            var noise = Math.sin(x * 0.15) * Math.cos(y * 0.15) * 0.15;
+                                            intensity += noise;
+                                            intensity = Math.max(0, Math.min(1, intensity));
+
+                                            // Dots get smaller and lighter near edges
+                                            var r = baseDotR * (0.35 + intensity * 0.65);
+                                            var alpha = 0.08 + intensity * 0.38;
+
+                                            ctx.beginPath();
+                                            ctx.arc(x, y, r, 0, Math.PI * 2);
+                                            ctx.fillStyle = 'rgba(0,0,0,' + alpha.toFixed(3) + ')';
+                                            ctx.fill();
+                                        }
+                                    }
+                                }
+                            }
+
+                            function init() {
+                                drawHalftoneHand('dotCanvasLeft', 'left');
+                                drawHalftoneHand('dotCanvasRight', 'right');
+                            }
+
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', init);
+                            } else {
+                                init();
+                            }
+                            window.addEventListener('resize', function () {
+                                drawHalftoneHand('dotCanvasLeft', 'left');
+                                drawHalftoneHand('dotCanvasRight', 'right');
+                            });
+                        })();
+                    </script>
+
+                </section>
+
+                <div class="container">
+
+                    <!-- Companies Section -->
+                    <div class="ticker-section">
+                        <h3 class="ticker-title">Jobs available in</h3>
+                        <div class="ticker-wrapper">
+                            <div class="ticker-content">
+                                <!-- First set of companies -->
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/Google.jpg" alt="Google">
+                                    <span>Google</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/netflix.png" alt="Netflix">
+                                    <span>Netflix</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/swiggy.png" alt="Swiggy">
+                                    <span>Swiggy</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/uber.png" alt="Uber">
+                                    <span>Uber</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/zomato.png" alt="Zomato">
+                                    <span>Zomato</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/airbnb.png" alt="Airbnb">
+                                    <span>Airbnb</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/flipkart.png" alt="Flipkart">
+                                    <span>Flipkart</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/meta.jpeg" alt="Meta">
+                                    <span>Meta</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/amazon_logo_icon_147320.png"
+                                        alt="Amazon">
+                                    <span>Amazon</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/microsoft-icon-logo-symbol-free-png.webp"
+                                        alt="Microsoft">
+                                    <span>Microsoft</span>
+                                </div>
+
+                                <!-- Duplicated set for seamless scrolling -->
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/Google.jpg" alt="Google">
+                                    <span>Google</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/netflix.png" alt="Netflix">
+                                    <span>Netflix</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/swiggy.png" alt="Swiggy">
+                                    <span>Swiggy</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/uber.png" alt="Uber">
+                                    <span>Uber</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/zomato.png" alt="Zomato">
+                                    <span>Zomato</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/airbnb.png" alt="Airbnb">
+                                    <span>Airbnb</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/flipkart.png" alt="Flipkart">
+                                    <span>Flipkart</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/meta.jpeg" alt="Meta">
+                                    <span>Meta</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/amazon_logo_icon_147320.png"
+                                        alt="Amazon">
+                                    <span>Amazon</span>
+                                </div>
+                                <div class="company-pill twinkler">
+                                    <img src="../../public/images/company-logos/microsoft-icon-logo-symbol-free-png.webp"
+                                        alt="Microsoft">
+                                    <span>Microsoft</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories Section -->
+                    <div id="jobs" class="categories-section">
+                        <div class="container">
+                            <h2 class="categories-title">
+                                <span class="title-line-1">Browse by</span>
+                                <span class="title-line-2">Job Categories</span>
+                            </h2>
+
+                            <div class="categories-grid">
+                                <div class="category-card" data-index="0" data-anim="card-batch"
+                                    data-category="Software Engineering"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Software Engineering'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Software Engineering<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">1,243 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="1" data-anim="card-batch"
+                                    data-category="Data Science"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Data Science'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 3H21V21H3V3Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M9 9H15V15H9V9Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M3 9H21" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" />
+                                            <path d="M9 3V21" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Data Science<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">421 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="2" data-anim="card-batch"
+                                    data-category="Product Management"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Product Management'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Product Management<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">312 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="3" data-anim="card-batch"
+                                    data-category="UI/UX Design"
+                                    onclick="window.location.href='../jobs/jobs.html?category=UI/UX Design'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">UI/UX Design<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">287 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="4" data-anim="card-batch"
+                                    data-category="Marketing"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Marketing'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M22 16V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V16"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M18 11L12 5L6 11" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M12 5V15" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Marketing<span class="category-name-tooltip">Explore
+                                                this category</span></h3>
+                                        <p class="category-subtitle">534 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="5" data-anim="card-batch"
+                                    data-category="Human Resources"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Human Resources'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17 21V19C17 17.9 16.1 17 15 17H5C3.9 17 3 17.9 3 19V21"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M10 11C12.2 11 14 9.2 14 7C14 4.8 12.2 3 10 3C7.8 3 6 4.8 6 7C6 9.2 7.8 11 10 11Z"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M20 11C21.1 11 22 10.1 22 9C22 7.9 21.1 7 20 7"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M20 11V13" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Human Resources<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">158 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="6" data-anim="card-batch" data-category="Sales"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Sales'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Sales<span class="category-name-tooltip">Explore this
+                                                category</span></h3>
+                                        <p class="category-subtitle">402 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="7" data-anim="card-batch"
+                                    data-category="Finance & Accounting"
+                                    onclick="window.location.href='../jobs/jobs.html?category=Finance & Accounting'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 2V22M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">Finance & Accounting<span
+                                                class="category-name-tooltip">Explore this category</span></h3>
+                                        <p class="category-subtitle">367 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+
+                                <div class="category-card" data-index="8" data-anim="card-batch" data-category="AI/ML"
+                                    onclick="window.location.href='../jobs/jobs.html?category=AI/ML'"
+                                    style="cursor: pointer;">
+                                    <div class="category-icon-wrapper">
+                                        <svg class="category-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="category-content">
+                                        <h3 class="category-name">AI/ML<span class="category-name-tooltip">Explore this
+                                                category</span></h3>
+                                        <p class="category-subtitle">216 Jobs Opened</p>
+                                    </div>
+                                    <div class="category-arrow">→</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How Our Platform Works Section -->
+                    <div id="features" class="platform-works-section">
+                        <div class="container">
+                            <h2 class="platform-works-title">How Our Platform Works</h2>
+
+                            <div class="platform-works-content">
+                                <!-- Left Side: Feature Card -->
+                                <div class="feature-card-wrapper">
+                                    <div class="feature-card" data-anim="card-batch">
+                                        <div class="feature-image-container">
+                                            <div class="feature-image-placeholder"
+                                                style="background: #f4f6fb; padding: 0; overflow: hidden; height: 340px;">
+                                                <!-- Animated Dashboard Mockup -->
+                                                <div class="dash-mock">
+                                                    <div class="dm-profile">
+                                                        <div class="dm-avatar">G</div>
+                                                        <div class="dm-profile-info">
+                                                            <div class="dm-name">Pendyal Gaurav</div>
+                                                            <div class="dm-role">⚡ Full Stack · Advanced</div>
+                                                        </div>
+                                                        <div class="dm-stats">
+                                                            <div class="dm-stat">
+                                                                <div class="dv">12</div>
+                                                                <div class="dl">Quizzes</div>
+                                                            </div>
+                                                            <div class="dm-stat">
+                                                                <div class="dv">71%</div>
+                                                                <div class="dl">Avg Score</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-rank">
+                                                            <div class="dr-label">Global Rank</div>
+                                                            <div class="dr-val">3,677,453</div>
+                                                            <div class="dr-rise">↑ Rising</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dm-section-label">Recommended Companies · Click to view
+                                                        acceptance</div>
+                                                    <div class="dm-companies">
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#4285F4,#34A853);">
+                                                                G</div>
+                                                            <div class="dm-co-name">Google DeepMind</div>
+                                                            <div class="dm-co-role">ML Engineer · Intern</div>
+                                                            <div class="dm-match-pct" style="color:#16a34a">91%</div>
+                                                            <div class="dm-match-label strong">Strong Match</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:91%;background:#16a34a;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#2563EB,#06b6d4);">
+                                                                F</div>
+                                                            <div class="dm-co-name">Flipkart</div>
+                                                            <div class="dm-co-role">Data Analyst</div>
+                                                            <div class="dm-match-pct" style="color:#16a34a">78%</div>
+                                                            <div class="dm-match-label strong">Strong Match</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:78%;background:#16a34a;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#2563EB,#1e3a8a);">
+                                                                R</div>
+                                                            <div class="dm-co-name">Razorpay</div>
+                                                            <div class="dm-co-role">Data Science Assoc.</div>
+                                                            <div class="dm-match-pct" style="color:#ca8a04">69%</div>
+                                                            <div class="dm-match-label moderate">Moderate</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:69%;background:#ca8a04;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+                                                                D</div>
+                                                            <div class="dm-co-name">Deloitte</div>
+                                                            <div class="dm-co-role">Junior Data Scientist</div>
+                                                            <div class="dm-match-pct" style="color:#ca8a04">62%</div>
+                                                            <div class="dm-match-label moderate">Moderate</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:62%;background:#ca8a04;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#f43f5e,#fb923c);">
+                                                                Q</div>
+                                                            <div class="dm-co-name">Quantiphi</div>
+                                                            <div class="dm-co-role">AI Research Trainee</div>
+                                                            <div class="dm-match-pct" style="color:#dc2626">54%</div>
+                                                            <div class="dm-match-label needs">Needs Work</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:54%;background:#dc2626;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dm-company-card">
+                                                            <div class="dm-co-logo"
+                                                                style="background:linear-gradient(135deg,#10b981,#2563EB);">
+                                                                M</div>
+                                                            <div class="dm-co-name">mu Sigma</div>
+                                                            <div class="dm-co-role">Decision Scientist</div>
+                                                            <div class="dm-match-pct" style="color:#16a34a">75%</div>
+                                                            <div class="dm-match-label strong">Strong Match</div>
+                                                            <div class="dm-bar-wrap">
+                                                                <div class="dm-bar"
+                                                                    style="width:75%;background:#16a34a;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="feature-card-content">
+                                            <a href="../jobs/jobs.html" class="feature-card-button">See Opened Jobs
+                                                →</a>
+                                            <h3 class="feature-card-title">Tips From Pro: How To Apply for a Job on a
+                                                Startup as a Fresh Graduate</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Side: Step Cards -->
+                                <div class="steps-container">
+                                    <div class="step-card" data-step="1" data-anim="card-batch"
+                                        onclick="window.location.href='./signup.html'" style="cursor: pointer;">
+                                        <div class="step-icon-wrapper">
+                                            <svg class="step-icon" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M20 21V19C20 17.9 19.1 17 18 17H6C4.9 17 4 17.9 4 19V21"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M12 11C14.2 11 16 9.2 16 7C16 4.8 14.2 3 12 3C9.8 3 8 4.8 8 7C8 9.2 9.8 11 12 11Z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div class="step-content">
+                                            <h4 class="step-title">Step 1 — Create Account</h4>
+                                            <p class="step-description">Set up your profile in minutes. Add your basic
+                                                details, experience, and job preferences so the platform can understand
+                                                what matches you best.</p>
+                                        </div>
+                                        <div class="step-arrow">→</div>
+                                    </div>
+
+                                    <div class="step-card" data-step="2" data-anim="card-batch"
+                                        onclick="window.location.href='./dashboard/index.html#view-upload-resume'"
+                                        style="cursor: pointer;">
+                                        <div class="step-icon-wrapper">
+                                            <svg class="step-icon" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M14 2V8H20" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div class="step-content">
+                                            <h4 class="step-title">Step 2 — Upload Your CV / Resume</h4>
+                                            <p class="step-description">Upload your resume once. Our system parses your
+                                                skills, experience, and strengths to personalize your job feed
+                                                instantly.</p>
+                                        </div>
+                                        <div class="step-arrow">→</div>
+                                    </div>
+
+                                    <div class="step-card" data-step="3" data-anim="card-batch"
+                                        onclick="window.location.href='./dashboard/index.html#view-profile'"
+                                        style="cursor: pointer;">
+                                        <div class="step-icon-wrapper">
+                                            <svg class="step-icon" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div class="step-content">
+                                            <h4 class="step-title">Step 3 — Set Your Skills & Preferences</h4>
+                                            <p class="step-description">Select your preferred job roles, technologies,
+                                                locations, and salary expectations. Our AI uses this data to match you
+                                                with the right companies.</p>
+                                        </div>
+                                        <div class="step-arrow">→</div>
+                                    </div>
+
+                                    <div class="step-card" data-step="4" data-anim="card-batch"
+                                        onclick="window.location.href='./dashboard/index.html#view-messages'"
+                                        style="cursor: pointer;">
+                                        <div class="step-icon-wrapper">
+                                            <svg class="step-icon" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M22 16V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V16"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M18 11L12 5L6 11" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M12 5V15" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div class="step-content">
+                                            <h4 class="step-title">Step 4 — Get Smart Job Recommendations</h4>
+                                            <p class="step-description">We recommend jobs tailored to your profile — not
+                                                generic listings. Each match is ranked based on skill fit, experience,
+                                                and job alignment.</p>
+                                        </div>
+                                        <div class="step-arrow">→</div>
+                                    </div>
+
+                                    <div class="step-card" data-step="5" data-anim="card-batch"
+                                        onclick="window.location.href='../jobs/jobs.html'" style="cursor: pointer;">
+                                        <div class="step-icon-wrapper">
+                                            <svg class="step-icon" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div class="step-content">
+                                            <h4 class="step-title">Step 5 — Apply With One Click</h4>
+                                            <p class="step-description">Apply directly or visit the source link
+                                                instantly. No more copying details repeatedly.</p>
+                                        </div>
+                                        <div class="step-arrow">→</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <section id="faq" class="faq-section">
+                        <div class="container">
+                            <h2 class="faq-title">
+                                <span class="title-line-1">Frequently Asked</span>
+                                <span class="title-line-2">Questions</span>
+                            </h2>
+
+                            <div class="faq-container">
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>How does DomainX AI work?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>DomainX AI is a smart real-time job and skills intelligence platform that
+                                            collects job listings from multiple sources and presents them in one
+                                            convenient experience. You can search, filter, and apply to jobs all in one
+                                            place.</p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>Is DomainX AI free to use?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Yes, DomainX AI is completely free for job seekers. You can browse jobs,
+                                            create a profile, and apply to positions without any charges. Some premium
+                                            features may be available for employers.</p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>How often are job listings updated?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Our platform updates job listings in real-time. New jobs are added as soon as
+                                            they become available from our partner sources, ensuring you have access to
+                                            the latest opportunities.</p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>Can I save jobs for later?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Absolutely! You can save any job listing to your dashboard for easy access
+                                            later. Simply click the save button on any job posting, and it will be added
+                                            to your saved jobs list.</p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>How do I apply for a job?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>To apply for a job, click on the job listing to view details, then click the
+                                            "Apply Now" button. You'll be redirected to the employer's application page
+                                            where you can submit your resume and cover letter.</p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <button class="faq-question" aria-expanded="false">
+                                        <span>Do I need to create an account?</span>
+                                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>While you can browse jobs without an account, creating a free account allows
+                                            you to save jobs, track applications, set up job alerts, and access
+                                            personalized job recommendations based on your preferences.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="contact-section">
+                        <div class="container">
+                            <h2 class="contact-title">
+                                <span class="title-line-1">Get in</span>
+                                <span class="title-line-2">Touch</span>
+                            </h2>
+
+
+                            <div class="contact-content"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <div class="contact-form-wrapper" style="max-width: 600px; width: 100%;">
+                                    <form class="contact-form">
+                                        <div class="form-group">
+                                            <input type="text" id="name" name="name" class="form-input"
+                                                placeholder="Your Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" id="email" name="email" class="form-input"
+                                                placeholder="Your Email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="subject" name="subject" class="form-input"
+                                                placeholder="Subject" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="message" name="message" class="form-textarea" rows="5"
+                                                placeholder="Your Message" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn-submit">Send Message</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating Chatbot Widgets -->
+    <!-- Robot Chatbot Widget (First Bot - Circle/Bubble) -->
+    <div id="robot-chatbot-widget" class="chatbot-widget robot-widget">
+        <div class="chatbot-toggle" id="robot-toggle">
+            <div id="robot-chatbot-container">
+                <svg id="robot-hair" class="robot-layer" width="30" height="30" viewBox="0 0 30 30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.9988 24.148L5.8512 0L-5.0344e-05 5.85133L24.1476 29.9993L29.9988 24.148Z"
+                        fill="#0E75B4" />
+                    <path d="M24.1487 0.00046199L0.00109863 24.1484L5.85235 29.9998L30 5.8518L24.1487 0.00046199Z"
+                        fill="#0E75B4" />
+                </svg>
+                <svg id="robot-head" class="robot-layer" width="52" height="50" viewBox="0 0 52 50" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M26,0c20.24,0,26,5.49,26,26.47,0,23.84-10.75,23.53-26,23.53S0,50.31,0,26.47C0,5.49,5.76,0,26,0Z"
+                        fill="url(#robot-head-color)" />
+                    <defs>
+                        <linearGradient id="robot-head-color" x1="26" y1="0" x2="26" y2="50"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#69D7FF" />
+                            <stop offset="1" stop-color="#00B4F5" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <svg id="robot-face" class="robot-layer" width="44" height="36" viewBox="0 0 44 36" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22,36c15.09,0,20.52-.87,21.83-16.94S39.44,0,22,0-1.1,3.45.17,19.06c1.3,16.07,6.74,16.94,21.83,16.94Z"
+                        fill="url(#robot-face-color)" />
+                    <defs>
+                        <linearGradient id="robot-face-color" x1="22" y1="0" x2="22" y2="36"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#005284" />
+                            <stop offset="1" stop-color="#0076BE" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <svg id="robot-expression" class="robot-layer" width="30" height="15" viewBox="0 0 32 15" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path id="robot-eye-l" d="M3.78,12c3.45,0,3.78-2.7,3.78-6S7.56,0,3.78,0,0,2.7,0,6s.33,6,3.78,6Z"
+                        fill="white" />
+                    <path id="robot-mouth"
+                        d="M13.05,12.76c-1.13-.45-.82,2.24,2.99,2.24,4.21,0,4.24-3.55,3.01-4.13-1.35-.64-1.75,3.6-5.99,1.89Z"
+                        fill="white" />
+                    <path id="robot-eye-r" d="M26.22,12c3.45,0,3.78-2.7,3.78-6s0-6-3.78-6-3.78,2.7-3.78,6,.33,6,3.78,6Z"
+                        fill="white" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot Widget (Panel only, opened by robot) -->
+    <div id="ai-chatbot-widget" class="chatbot-widget ai-widget">
+        <div class="chatbot-panel ai-panel" id="ai-panel">
+            <div class="chatbot-header">
+                <div class="ai-header-content">
+                    <h3>AI Assistant</h3>
+                    <div class="bot-status">
+                        <div class="status-indicator"></div>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="chatbot-close" id="ai-close">×</button>
+            </div>
+            <div class="chatbot-content ai-chat-content" id="aiChatContainer">
+                <!-- Messages will be added here -->
+            </div>
+            <div class="typing-indicator" id="aiTypingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <div class="chatbot-input-wrapper">
+                    <input type="text" class="chatbot-message-input" id="aiMessageInput"
+                        placeholder="Type your message..." aria-label="Message input">
+                    <button class="chatbot-send-button" id="aiSendButton">
+                        <span>Send</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../components/auth-ui.js"></script>
+    <script src="../components/script.js"></script>
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="../components/chatbots.js"></script>
+    <script type="module" src="../../public/assets/animation-init.js" async></script>
+    <script type="module" src="../../public/assets/dashboardButtonAnimations.js" async></script>
+    <script type="module" src="../../public/assets/navbarAnimations.js" async></script>
+    <script>
+        // Initialize auth UI after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.AuthUI) {
+                const container = document.querySelector('.auth-ui-container');
+                if (container) {
+                    window.AuthUI.renderAuthUI(container, {
+                        signupUrl: container.getAttribute('data-signup-url') || './signup.html',
+                        profileUrl: container.getAttribute('data-profile-url') || './dashboard/index.html#view-profile'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+/* Animation CSS hooks - Non-destructive styles */
+
+[data-anim] {
+  will-change: transform, opacity;
+}
+
+.anim-word {
+  display: inline-block;
+  transform: translateY(0);
+  backface-visibility: hidden;
+}
+
+/* Hero Lottie container */
+.hero__lottie,
+[data-lottie] {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  pointer-events: none;
+}
+
+.hero__lottie svg,
+[data-lottie] svg {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Card animations */
+[data-anim*="card"] {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  [data-anim],
+  .anim-word {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  [data-anim] {
+    will-change: auto;
+  }
+}
+
+/* Performance optimizations */
+.anim-word,
+[data-anim*="card"] {
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+}
+
